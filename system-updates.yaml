@@ -1,0 +1,6 @@
+- name: Update remote servers
+  hosts: all
+  become: yes
+  serial: 1
+  roles:
+    - update

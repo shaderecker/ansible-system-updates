@@ -1,0 +1,19 @@
+- name: apt update
+  apt:
+    force_apt_get: yes
+    update_cache: yes
+
+- name: apt dist-upgrade
+  apt:
+    force_apt_get: yes
+    upgrade: dist
+
+- name: apt autoremove
+  apt:
+    force_apt_get: yes
+    autoremove: yes
+
+- name: apt autoclean
+  apt:
+    force_apt_get: yes
+    autoclean: yes
