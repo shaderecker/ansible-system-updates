@@ -1,0 +1,12 @@
+- name: update
+  yum:
+    update_cache: yes
+
+- name: upgrade
+  yum:
+    name: '*'
+    state: latest
+
+- name: autoremove
+  yum:
+    autoremove: yes
