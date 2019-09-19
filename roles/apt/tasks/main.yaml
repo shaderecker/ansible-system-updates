@@ -1,0 +1,28 @@
+- name: update
+  apt:
+    force_apt_get: yes
+    update_cache: yes
+
+- name: dist-upgrade
+  apt:
+    force_apt_get: yes
+    upgrade: dist
+
+- name: autoremove
+  apt:
+    force_apt_get: yes
+    autoremove: yes
+
+- name: autoclean
+  apt:
+    force_apt_get: yes
+    autoclean: yes
+
+- name: Check if reboot is needed
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+
+- name: Reboot
+  reboot:
+  when: reboot_required.stat.exists == true
