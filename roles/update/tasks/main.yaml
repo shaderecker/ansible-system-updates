@@ -1,19 +1,30 @@
-- name: apt update
-  apt:
-    force_apt_get: yes
-    update_cache: yes
+- block:
+  - name: apt update
+    apt:
+      force_apt_get: yes
+      update_cache: yes
 
-- name: apt dist-upgrade
-  apt:
-    force_apt_get: yes
-    upgrade: dist
+  - name: apt dist-upgrade
+    apt:
+      force_apt_get: yes
+      upgrade: dist
 
-- name: apt autoremove
-  apt:
-    force_apt_get: yes
-    autoremove: yes
+  - name: apt autoremove
+    apt:
+      force_apt_get: yes
+      autoremove: yes
 
-- name: apt autoclean
-  apt:
-    force_apt_get: yes
-    autoclean: yes
+  - name: apt autoclean
+    apt:
+      force_apt_get: yes
+      autoclean: yes
+
+  - name: Check if reboot is needed
+    stat:
+      path: /var/run/reboot-required
+    register: reboot_required
+
+  - name: Reboot
+    reboot:
+    when: reboot_required.stat.exists == true
+  when: ansible_facts|list
