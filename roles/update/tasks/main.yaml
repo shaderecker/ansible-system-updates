@@ -7,4 +7,8 @@
     include_role:
       name: yum
     when: ansible_pkg_mgr == "yum"
+  - name: dnf package manager
+    include_role:
+      name: dnf
+    when: ansible_pkg_mgr == "dnf"
   when: ansible_facts|list
