@@ -1,3 +1,6 @@
 all:
   hosts:
-    X.X.X.X
+    myhost:
+      ansible_host: X.X.X.X
+      ansible_port: 22
+      ansible_user: linux
