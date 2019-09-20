@@ -11,4 +11,8 @@
     include_role:
       name: dnf
     when: ansible_pkg_mgr == "dnf"
+  - name: zypper package manager
+    include_role:
+      name: zypper
+    when: ansible_pkg_mgr == "zypper"
   when: ansible_facts|list
