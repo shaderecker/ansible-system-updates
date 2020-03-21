@@ -10,3 +10,15 @@
 - name: autoremove
   yum:
     autoremove: yes
+
+- name: Check if reboot is needed
+  shell: needs-restarting -r ; echo $?
+  register: reboot_required_command
+
+- name: Extract return code from output
+  set_fact:
+    reboot_required: "{{ reboot_required_command.stdout_lines | last }}"
+
+- name: Reboot
+  reboot:
+  when: reboot_required == "1"
