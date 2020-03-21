@@ -3,3 +3,12 @@
     name: "*"
     state: dist-upgrade
     update_cache: yes
+
+- name: Check if reboot is needed
+  stat:
+    path=/boot/do_purge_kernels
+  register: reboot_required
+
+- name: Reboot
+  reboot:
+  when: reboot_required.stat.exists == true
